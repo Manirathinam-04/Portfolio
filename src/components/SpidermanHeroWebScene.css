@@ -1,0 +1,344 @@
+/* ==========================================================================
+   SPIDER-MAN HERO 3D WEB SCENE & VFX CSS
+   Photorealistic 3D arm on left, dynamic web strand, card pull, crawling spider
+   ========================================================================== */
+
+/* 3D Hand Stage (Positioned on the Left / Bottom-Left Corner) */
+.spiderman-3d-hand-stage {
+  position: absolute;
+  left: -35px;
+  bottom: -20px;
+  top: auto;
+  transform: translateY(0);
+  width: min(440px, 32vw);
+  height: 300px;
+  z-index: 25;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.spiderman-threejs-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.model-loading-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Photorealistic Overlay / WebGL Hybrid Fallback */
+.spiderman-photoreal-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.spiderman-real-arm-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  mix-blend-mode: screen;
+  filter: contrast(1.22) brightness(1.08);
+  mask-image: radial-gradient(ellipse at 48% 50%, #000 60%, transparent 94%);
+  -webkit-mask-image: radial-gradient(ellipse at 48% 50%, #000 60%, transparent 94%);
+  drop-shadow: 0 0 35px rgba(225, 29, 72, 0.4);
+}
+
+/* Fallback / Anchor Nozzle Emitter */
+.spiderman-fallback-nozzle {
+  position: absolute;
+  left: 45.8%;
+  top: 45.2%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.nozzle-core-spark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #00f0ff 60%, #0284c7 100%);
+  box-shadow: 
+    0 0 16px #00f0ff,
+    0 0 32px #0284c7,
+    0 0 50px rgba(0, 240, 255, 0.85);
+  animation: nozzleFlickerCore 0.2s infinite alternate ease-in-out;
+}
+
+@keyframes nozzleFlickerCore {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.25); opacity: 1; }
+}
+
+.nozzle-pulse-halo {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid #00f0ff;
+  opacity: 0.7;
+  animation: nozzleHaloExpand 1.2s infinite ease-out;
+}
+
+@keyframes nozzleHaloExpand {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.spiderman-fallback-nozzle.firing .nozzle-core-spark {
+  box-shadow: 
+    0 0 25px #ffffff,
+    0 0 45px #00f0ff,
+    0 0 80px rgba(0, 240, 255, 0.95);
+  transform: scale(1.4);
+}
+
+/* THWIP! Comic Burst Badge */
+.hero-thwip-badge {
+  position: absolute;
+  top: 12%;
+  left: 56%;
+  z-index: 40;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: radial-gradient(circle, #e11d48 0%, #9f1239 100%);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  border: 2px solid #ffea00;
+  box-shadow: 
+    0 0 24px rgba(225, 29, 72, 0.8),
+    0 6px 18px rgba(0, 0, 0, 0.7);
+  animation: thwipPopHero 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes thwipPopHero {
+  0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+  70% { transform: scale(1.2) rotate(4deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.thwip-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #ffea00;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  text-shadow: 
+    2px 2px 0 #000,
+    -1px -1px 0 #000,
+    0 0 12px rgba(255, 234, 0, 0.8);
+  line-height: 1;
+}
+
+.thwip-desc {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+/* Realistic Web Strand Layer */
+.realistic-web-strand-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 22;
+  overflow: visible;
+}
+
+.realistic-web-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.web-core-strand {
+  animation: webTensionVibrate 0.15s infinite alternate ease-in-out;
+}
+
+@keyframes webTensionVibrate {
+  0% { opacity: 0.95; }
+  100% { opacity: 1; }
+}
+
+/* Web Impact Splat Decal on Card Anchor */
+.hero-web-impact-decal {
+  position: absolute;
+  z-index: 30;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px #38bdf8) drop-shadow(0 0 20px #ffffff);
+  animation: impactDecalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes impactDecalPop {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-30deg); opacity: 0; }
+  70% { transform: translate(-50%, -50%) scale(1.25) rotate(10deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Realistic Crawling Spider Stage */
+.hero-crawling-spider-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 45;
+  overflow: visible;
+}
+
+.hero-spider-entity {
+  position: absolute;
+  pointer-events: none;
+  transition: transform 0.06s linear;
+  will-change: transform, left, top;
+}
+
+/* Spider Silk Dragline */
+.hero-spider-silk-dragline {
+  position: absolute;
+  width: 1.5px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.9) 85%, #ffffff);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  z-index: 42;
+}
+
+/* Alternating 8-Leg Walking Gait */
+.spider-anatomical-svg.walking-cycle .leg-odd-walk {
+  animation: spiderLegOddGait 0.26s infinite alternate ease-in-out;
+  transform-origin: 0 0;
+}
+
+.spider-anatomical-svg.walking-cycle .leg-even-walk {
+  animation: spiderLegEvenGait 0.26s infinite alternate ease-in-out;
+  transform-origin: 0 0;
+}
+
+@keyframes spiderLegOddGait {
+  0% { transform: rotate(-7deg) scaleY(0.95); }
+  100% { transform: rotate(8deg) scaleY(1.05); }
+}
+
+@keyframes spiderLegEvenGait {
+  0% { transform: rotate(8deg) scaleY(1.05); }
+  100% { transform: rotate(-7deg) scaleY(0.95); }
+}
+
+/* Live HUD Scroll Status Pill */
+.hero-spidey-hud {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(12, 16, 12, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+}
+
+.hud-hand-mode-toggle {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.hud-hand-mode-toggle:hover {
+  background: rgba(0, 240, 255, 0.25);
+  border-color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.hud-spider-icon {
+  font-size: 1.1rem;
+}
+
+.hud-status-text {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.hud-status-text strong {
+  color: #ff3b5c;
+}
+
+.hud-progress-meter {
+  width: 70px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.hud-meter-fill {
+  height: 100%;
+  background: linear-gradient(to right, #ff3b5c, #00f0ff, #CEFF00);
+  transition: width 0.08s linear;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .spiderman-3d-hand-stage {
+    width: min(340px, 40vw);
+    left: -30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .spiderman-3d-hand-stage {
+    width: 240px;
+    left: -40px;
+    top: 40%;
+  }
+  .hero-spidey-hud {
+    top: 75px;
+    padding: 4px 12px;
+    gap: 8px;
+  }
+  .hud-status-text {
+    font-size: 0.68rem;
+  }
+}

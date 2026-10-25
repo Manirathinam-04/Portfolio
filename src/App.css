@@ -1,0 +1,19 @@
+/* ==========================================================================
+   APP LEVEL STYLES
+   ========================================================================== */
+
+.portfolio-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+#main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
