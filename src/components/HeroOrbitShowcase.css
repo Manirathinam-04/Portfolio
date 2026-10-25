@@ -493,54 +493,95 @@
   }
 }
 
-@media (max-width: 600px) {
-  .orbit-showcase-container {
-    max-width: 360px;
-    height: 380px;
-  }
-  .track-inner {
+@media (max-width: 768px) {
+  .orbit-core-glow {
     width: 240px;
     height: 240px;
+    filter: blur(30px);
   }
-  .track-outer {
-    width: 330px;
-    height: 330px;
-  }
-  .orbit-ring.ring-1 {
+  .orbit-secondary-glow {
     width: 180px;
     height: 180px;
+    filter: blur(25px);
+  }
+}
+
+@media (max-width: 600px) {
+  .orbit-showcase-container {
+    max-width: 350px;
+    height: 360px;
+  }
+  .track-inner {
+    width: 230px;
+    height: 230px;
+  }
+  .track-outer {
+    width: 310px;
+    height: 310px;
+  }
+  .orbit-ring.ring-1 {
+    width: 170px;
+    height: 170px;
   }
   .orbit-ring.ring-2 {
-    width: 250px;
-    height: 250px;
+    width: 230px;
+    height: 230px;
   }
   .orbit-ring.ring-3 {
-    width: 330px;
-    height: 330px;
+    width: 310px;
+    height: 310px;
   }
   .tech-icon-pill {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
   }
   .tech-icon-pill svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
   .orbit-portrait-center {
-    width: 240px;
-    height: 310px;
+    width: 220px;
+    height: 290px;
   }
   .floating-orbit-badge {
-    padding: 6px 10px;
-    font-size: 0.72rem;
+    padding: 5px 9px;
+    font-size: 0.7rem;
   }
   .badge-top-right {
-    top: 5%;
-    right: 0%;
+    top: 4%;
+    right: 2%;
   }
   .badge-bottom-left {
-    bottom: 5%;
-    left: 0%;
+    bottom: 4%;
+    left: 2%;
+  }
+}
+
+@media (max-width: 390px) {
+  .orbit-showcase-container {
+    max-width: 310px;
+    height: 320px;
+    transform: scale(0.92);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 340px) {
+  .orbit-showcase-container {
+    max-width: 280px;
+    height: 295px;
+    transform: scale(0.82);
+    transform-origin: center center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-track,
+  .track-inner,
+  .track-outer,
+  .tech-icon-pill,
+  .orbit-core-glow {
+    animation: none !important;
   }
 }

@@ -176,11 +176,27 @@ button {
 
 @media (max-width: 768px) {
   .section-wrapper {
-    padding: 70px 0;
+    padding: 64px 0;
   }
   .container {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .section-header {
+    margin-bottom: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-wrapper {
+    padding: 48px 0;
+  }
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .card {
+    padding: 20px 16px;
   }
 }
 

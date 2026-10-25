@@ -235,3 +235,20 @@
     gap: 30px;
   }
 }
+
+@media (max-width: 600px) {
+  .edu-card,
+  .cert-card {
+    padding: 20px 16px;
+    gap: 12px;
+  }
+  .edu-degree {
+    font-size: 1.05rem;
+  }
+  .cert-title {
+    font-size: 1.05rem;
+  }
+  .edu-meta {
+    gap: 8px;
+  }
+}

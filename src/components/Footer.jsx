@@ -21,7 +21,13 @@ export default function Footer() {
         <div className="footer-top-row">
           <div className="footer-brand">
             <div className="footer-monogram">
-              <img src={profile.photo} alt={profile.shortName} className="footer-avatar-mini" />
+              <img 
+                src={profile.photo} 
+                alt={profile.shortName} 
+                className="footer-avatar-mini" 
+                loading="lazy" 
+                decoding="async" 
+              />
               <div className="monogram-dot"></div>
             </div>
             <div>

@@ -186,3 +186,16 @@
     align-items: flex-start;
   }
 }
+
+@media (max-width: 600px) {
+  .timeline-card {
+    padding: 20px 16px;
+    gap: 14px;
+  }
+  .timeline-role {
+    font-size: 1.18rem;
+  }
+  .timeline-org {
+    font-size: 0.95rem;
+  }
+}

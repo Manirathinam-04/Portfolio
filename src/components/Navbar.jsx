@@ -10,33 +10,65 @@ export default function Navbar() {
 
   const { profile, navLinks } = portfolioData;
 
+  // Throttled scroll listener with requestAnimationFrame to prevent re-render thrashing
   useEffect(() => {
+    let ticking = false;
+    let lastSectionCheck = 0;
+
     const handleScroll = () => {
-      if (window.scrollY > 30) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY > 25;
+          setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
 
-      // Detect active section
-      const sections = ['home', 'about', 'skills', 'projects', 'experience', 'education', 'resume', 'contact'];
-      const scrollPosition = window.scrollY + 140;
+          const now = Date.now();
+          if (now - lastSectionCheck > 120) {
+            lastSectionCheck = now;
+            const sections = ['home', 'about', 'skills', 'projects', 'experience', 'education', 'resume', 'contact'];
+            const scrollPosition = window.scrollY + 140;
 
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(sectionId);
-            break;
+            for (const sectionId of sections) {
+              const el = document.getElementById(sectionId);
+              if (el) {
+                const top = el.offsetTop;
+                const height = el.offsetHeight;
+                if (scrollPosition >= top && scrollPosition < top + height) {
+                  setActiveSection((prev) => (prev !== sectionId ? sectionId : prev));
+                  break;
+                }
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   const closeMobileMenu = () => {
@@ -105,7 +137,15 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer Menu */}
-      <div className={`mobile-menu-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+      <div 
+        className={`mobile-menu-drawer ${mobileMenuOpen ? 'open' : ''}`}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) closeMobileMenu();
+        }}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+      >
         <div className="mobile-menu-content">
           <nav className="mobile-nav">
             <ul className="mobile-nav-list">

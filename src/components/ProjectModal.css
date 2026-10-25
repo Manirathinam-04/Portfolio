@@ -218,3 +218,25 @@
     padding: 24px 20px;
   }
 }
+
+@media (max-width: 600px) {
+  .modal-backdrop {
+    padding: 12px;
+  }
+  .modal-body {
+    padding: 20px 14px;
+  }
+  .modal-title {
+    font-size: 1.45rem;
+  }
+  .modal-close-btn {
+    top: 12px;
+    right: 12px;
+  }
+  .modal-actions {
+    flex-direction: column;
+  }
+  .modal-actions .btn {
+    width: 100%;
+  }
+}

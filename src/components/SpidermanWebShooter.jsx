@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './SpidermanWebShooter.css';
 
 /**
@@ -13,9 +13,7 @@ export default function SpidermanWebShooter({
   scrollProgress = 0,
   nozzleRef,
   anchorRef,
-  viewportRef,
-  isAttached = false,
-  isShooting = false
+  viewportRef
 }) {
   const [coords, setCoords] = useState({ x1: 180, y1: 380, x2: 900, y2: 320 });
 
