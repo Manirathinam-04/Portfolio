@@ -212,4 +212,19 @@
   .skills-badge-list {
     grid-template-columns: 1fr;
   }
+  .skills-filters {
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+  .filter-btn {
+    font-size: 0.8rem;
+    padding: 6px 13px;
+  }
+  .skill-group-card {
+    padding: 18px 14px;
+  }
+  .skills-philosophy-bar {
+    padding: 18px 14px;
+    gap: 16px;
+  }
 }

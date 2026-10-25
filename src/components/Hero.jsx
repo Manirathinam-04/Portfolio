@@ -29,8 +29,9 @@ export default function Hero() {
   const contentRef = useRef(null);
   const promptRef = useRef(null);
 
-  // Smooth scroll-driven entrance:
-  // Visual card (Developer Orbit & Photo) starts on the right, glides smoothly into place on scroll
+  // Smooth scroll-driven entrance via gsap.matchMedia:
+  // Desktop (>1024px): Visual card glides in on scroll with scrub
+  // Mobile (<=1024px): Naturally placed in flow with clean props
   useEffect(() => {
     const track = heroTrackRef.current;
     const visualEl = visualRef.current;
@@ -38,14 +39,12 @@ export default function Hero() {
     const promptEl = promptRef.current;
     if (!track || !visualEl) return;
 
-    // Check prefers-reduced-motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const mm = gsap.matchMedia();
 
-    const ctx = gsap.context(() => {
-      // Calculate responsive initial right shift based on screen width
+    // Desktop animation
+    mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', () => {
       const initialShiftX = Math.min(540, Math.max(340, window.innerWidth * 0.40));
 
-      // Initial state: card starts offset to the right with subtle perspective and opacity
       gsap.set(visualEl, {
         x: initialShiftX,
         opacity: 0.35,
@@ -63,7 +62,6 @@ export default function Hero() {
         }
       });
 
-      // Card glides in from the right to its position as user scrolls
       tl.to(visualEl, {
         x: 0,
         opacity: 1,
@@ -73,7 +71,6 @@ export default function Hero() {
         ease: 'power2.out'
       }, 0.05);
 
-      // Subtle parallax on the content
       if (contentEl) {
         tl.to(contentEl, {
           y: -25,
@@ -82,7 +79,6 @@ export default function Hero() {
         }, 0.05);
       }
 
-      // Prompt fades out as user begins scrolling
       if (promptEl) {
         tl.to(promptEl, {
           opacity: 0,
@@ -91,9 +87,16 @@ export default function Hero() {
           ease: 'power1.out'
         }, 0);
       }
-    }, heroTrackRef);
+    });
 
-    return () => ctx.revert();
+    // Mobile / Tablet / Reduced Motion: clean, non-pinned static reset
+    mm.add('(max-width: 1024px), (prefers-reduced-motion: reduce)', () => {
+      gsap.set([visualEl, contentEl], {
+        clearProps: 'all'
+      });
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (

@@ -287,11 +287,44 @@
 @media (max-width: 900px) {
   .contact-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 
 @media (max-width: 550px) {
   .form-row {
     grid-template-columns: 1fr;
+  }
+  .contact-form-container {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+  .contact-card {
+    padding: 18px 16px;
+    gap: 14px;
+  }
+  .channel-value {
+    font-size: 1rem;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 380px) {
+  .channel-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .channel-actions .btn {
+    width: 100%;
+  }
+  .copy-btn {
+    min-width: unset;
+  }
+  .contact-meta-card {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .meta-divider {
+    display: none;
   }
 }

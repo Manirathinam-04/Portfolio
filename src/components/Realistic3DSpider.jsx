@@ -1,4 +1,3 @@
-import React from 'react';
 import './SpidermanHeroWebScene.css';
 
 /**
@@ -13,11 +12,11 @@ export default function Realistic3DSpider({ progress = 0 }) {
   // Trajectory calculation based on scroll progress (0 to 1)
   // Phase A (0.0 to 0.55): Crawls horizontally across the hero card surface
   // Phase B (0.55 to 1.0): Reaches edge, turns downward, and descends over edge on silk
-  let posX = 60; // % of card width
-  let posY = 20; // % of card height
-  let rot = 115;  // angle in degrees
-  let opacity = Math.min(1, progress * 6);
+  let posX;
+  let posY;
+  let rot;
   let silkLength = 0;
+  const opacity = Math.min(1, progress * 6);
   const isWalking = progress > 0.03 && progress < 0.98;
 
   if (progress < 0.55) {

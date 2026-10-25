@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import './SpidermanHeroWebScene.css';
@@ -157,7 +157,7 @@ export default function Spiderman3DHand({
       };
     } catch (e) {
       console.warn('WebGL initialization error:', e);
-      setWebGLFailed(true);
+      setTimeout(() => setWebGLFailed(true), 0);
     }
   }, [handMode, onNozzleUpdate]);
 

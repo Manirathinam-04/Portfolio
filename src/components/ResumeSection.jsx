@@ -8,9 +8,7 @@ import {
   CheckCircle2, 
   Eye, 
   EyeOff,
-  ShieldCheck,
-  Briefcase,
-  GraduationCap
+  ShieldCheck
 } from 'lucide-react';
 
 export default function ResumeSection() {
@@ -50,6 +48,8 @@ export default function ResumeSection() {
                   src={profile.photo} 
                   alt={profile.name} 
                   className="resume-portrait-img" 
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span className="doc-format-badge">PDF • 2 PAGES</span>
               </div>

@@ -9,6 +9,7 @@
   width: 100%;
   position: relative;
   background-color: var(--bg-primary);
+  overflow-x: clip;
 }
 
 #main-content {
@@ -16,4 +17,5 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow-x: clip;
 }

@@ -61,6 +61,8 @@ export default function About() {
                   src={profile.photo} 
                   alt={profile.name} 
                   className="profile-full-img"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="profile-overlay-gradient"></div>
                 
